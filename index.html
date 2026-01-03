@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory Mini Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <h2>Inventory Test Form</h2>
+
+  <form id="inventoryForm">
+    <label>
+      Date:
+      <input type="date" name="date" required>
+    </label>
+    <br><br>
+
+    <label>
+      IN / OUT:
+      <select name="type" required>
+        <option value="">Select</option>
+        <option value="IN">IN</option>
+        <option value="OUT">OUT</option>
+      </select>
+    </label>
+    <br><br>
+
+    <label>
+      Client:
+      <input type="text" name="client" required>
+    </label>
+    <br><br>
+
+    <label>
+      Amount:
+      <input type="number" name="amount" min="1" required>
+    </label>
+    <br><br>
+
+    <label>
+      Item:
+      <input type="text" name="item" required>
+    </label>
+    <br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>
