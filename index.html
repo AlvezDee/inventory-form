@@ -1,99 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <!--
-  <head>
-  <meta charset="UTF-8">
-  <title>Inventory Mini Form</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-  -->
+<html>
 <body>
-  
-  <h2>Inventory Test Form</h2>
 
-  <form id="inventoryForm">
-    <label>
-      Date:
-      <input type="date" name="date" required>
-    </label>
-    <br><br>
+<h3>Inventory</h3>
 
-    <label>
-      IN / OUT:
-      <select name="type" required>
-        <option value="">Select</option>
-        <option value="IN">IN</option>
-        <option value="OUT">OUT</option>
-      </select>
-    </label>
-    <br><br>
+<input id="userEmail" placeholder="Your email"><br><br>
 
-    <label>
-      Client:
-      <input type="text" name="client" required>
-    </label>
-    <br><br>
+<select id="type">
+  <option value="IN">IN</option>
+  <option value="OUT">OUT</option>
+</select><br><br>
 
-    <label>
-      Amount:
-      <input type="number" name="amount" min="1" required>
-    </label>
-    <br><br>
+<input id="client" placeholder="Client"><br><br>
 
-    <label>
-      Item:
-      <input type="text" name="item" required>
-    </label>
-    <br><br>
+<hr>
 
-    <button type="submit">Submit</button>
-  </form>
+<input id="item" placeholder="Item"><br>
+<input id="amount" type="number" placeholder="Amount"><br>
+<input id="description" placeholder="Description"><br><br>
 
-  <p id="status"></p>
+<button id="addItem">Add Item</button>
 
-  <!-- SCRIPT SEMPRE NO FINAL DO BODY -->
-  <script>
-    console.log('Script loaded');
+<ul id="itemsList"></ul>
 
-    const form = document.getElementById('inventoryForm');
-    const statusEl = document.getElementById('status');
+<button id="submitAll">Submit</button>
 
-    if (!form) {
-      console.error('Form not found');
-    }
+<p id="status"></p>
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      statusEl.textContent = 'Sending...';
-
-      const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
-
-      try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxU_mcGlOkOB8sF2E6omclV0Lv3fvYiT-TOazEUXrzWnqhcSKbaiY2vxC8Loraz1U_CJQ/exec', {
-  method: 'POST',
-  body: new URLSearchParams(payload)
-});
-
-        const result = await response.json();
-
-        if (result.success) {
-          statusEl.textContent = 'Submitted successfully';
-          form.reset();
-        } else {
-          statusEl.textContent = 'Backend error';
-          console.error(result);
-        }
-
-      } catch (err) {
-        statusEl.textContent = 'Request failed';
-        console.error(err);
-      }
-    });
-  </script>
-
+<script src="inventory.js"></script>
 </body>
 </html>
