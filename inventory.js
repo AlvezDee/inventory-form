@@ -29,11 +29,14 @@ document.getElementById("submitAll").onclick = async () => {
 
   statusEl().innerText = "Sending...";
 
-  const res = await fetch(SCRIPT_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
+  const formData = new URLSearchParams();
+formData.append("data", JSON.stringify(payload));
+
+const res = await fetch(SCRIPT_URL, {
+  method: "POST",
+  body: formData
+});
+
 
   const json = await res.json();
 
