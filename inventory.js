@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6zA5F5ybmjzZ5If4XeAxfr0VrYN6tb6VD459_At5tc8esnpp6vNrIVXUde1QXrmM/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAo07FlZnri9obgio0VLB55_1szlmnXkndObJI52t73kGv0Crmgp2rENNgY-gU19B1/exec";
 
 const items = [];
 
