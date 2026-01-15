@@ -1,3 +1,6 @@
+console.log("JS NOVO CARREGADO", new Date().toISOString());
+
+
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAo07FlZnri9obgio0VLB55_1szlmnXkndObJI52t73kGv0Crmgp2rENNgY-gU19B1/exec";
 
 const items = [];
