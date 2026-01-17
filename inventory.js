@@ -1,4 +1,4 @@
-const API_URL = "COLE_AQUI_SUA_URL_DO_APPS_SCRIPT";
+const API_URL = "https://script.google.com/macros/s/AKfycbylSCOH-YMEOiXnc1tSlY3RIsgSafUxt8Q21LmL5X8Cb_FFGU56FQ-sLi_bplO461wA/exec";
 
 document.getElementById("submitAll").onclick = async () => {
   const items = [];
