@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory</title>
+</head>
 <body>
 
-<h3>Inventory</h3>
+<h2>Inventory Entry</h2>
 
-<input id="userEmail" placeholder="Your email"><br><br>
+<label>Email</label><br>
+<input type="email" id="user_email"><br><br>
 
+<label>Type</label><br>
 <select id="type">
   <option value="IN">IN</option>
   <option value="OUT">OUT</option>
 </select><br><br>
 
-<input id="client" placeholder="Client"><br><br>
+<label>Client</label><br>
+<input type="text" id="client"><br><br>
 
-<hr>
+<label>Amount</label><br>
+<input type="number" id="amount"><br><br>
 
-<input id="item" placeholder="Item"><br>
-<input id="amount" type="number" placeholder="Amount"><br>
-<input id="description" placeholder="Description"><br><br>
+<label>Item</label><br>
+<input type="text" id="item"><br><br>
 
-<button id="addItem">Add Item</button>
+<label>Description</label><br>
+<input type="text" id="description"><br><br>
 
-<ul id="itemsList"></ul>
-
-<button id="submitAll">Submit</button>
+<button type="button" id="submitBtn">Send</button>
 
 <p id="status"></p>
 
