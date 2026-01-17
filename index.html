@@ -1,38 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Inventory</title>
+  <meta charset="UTF-8" />
+  <title>Inventory Form</title>
 </head>
 <body>
 
-<h2>Inventory Entry</h2>
+  <input id="user_email" placeholder="Email"><br>
+  <input id="source" placeholder="Source"><br>
+  <input id="type" placeholder="Type"><br>
+  <input id="client" placeholder="Client"><br>
+  <input id="amount" placeholder="Amount"><br>
+  <input id="item" placeholder="Item"><br>
+  <input id="description" placeholder="Description"><br><br>
 
-<label>Email</label><br>
-<input type="email" id="user_email"><br><br>
+  <button id="submitBtn">Enviar</button>
 
-<label>Type</label><br>
-<select id="type">
-  <option value="IN">IN</option>
-  <option value="OUT">OUT</option>
-</select><br><br>
+  <!-- CACHE BUSTING OBRIGATÓRIO -->
+  <script src="inventory.js?v=20260115"></script>
 
-<label>Client</label><br>
-<input type="text" id="client"><br><br>
-
-<label>Amount</label><br>
-<input type="number" id="amount"><br><br>
-
-<label>Item</label><br>
-<input type="text" id="item"><br><br>
-
-<label>Description</label><br>
-<input type="text" id="description"><br><br>
-
-<button type="button" id="submitAll">Send</button>
-
-<p id="status"></p>
-
-<script src="inventory.js?v=20260115"></script>
 </body>
 </html>
