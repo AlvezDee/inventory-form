@@ -1,7 +1,7 @@
 console.log("JS carregado");
 
 document.addEventListener("DOMContentLoaded", () => {
-  const submitBtn = document.getElementById("submitBtn");
+  const submitBtn = document.getElementById("submitAll");
   const statusEl = document.getElementById("status");
 
   if (!submitBtn) {
