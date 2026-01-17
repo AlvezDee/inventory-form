@@ -1,67 +1,40 @@
-console.log("JS NOVO CARREGADO", new Date().toISOString());
+console.log("JS carregado");
 
-
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhMFPUlzlZ0BbiD7HxNyFSU0hnktB86bZ0Xgi2egrQk8rxYsENgB9BRpdKfgY6maHQ/exec";
-
-const items = [];
-
-document.getElementById("addItem").onclick = () => {
-  const item = itemEl().value.trim();
-  const amount = Number(amountEl().value);
-  const description = descEl().value.trim();
-
-  if (!item || amount <= 0) return;
-
-  items.push({ item, amount, description });
-  render();
-
-  itemEl().value = "";
-  amountEl().value = "";
-  descEl().value = "";
-};
-
-document.getElementById("submitAll").onclick = async () => {
-  if (!items.length) return;
-
+document.getElementById("submitBtn").addEventListener("click", async () => {
   const payload = {
-    user_email: emailEl().value.trim(),
-    type: typeEl().value,
-    client: clientEl().value.trim(),
-    items
+    user_email: document.getElementById("user_email").value,
+    type: document.getElementById("type").value,
+    client: document.getElementById("client").value,
+    amount: document.getElementById("amount").value,
+    item: document.getElementById("item").value,
+    description: document.getElementById("description").value
   };
 
-  statusEl().innerText = "Sending...";
+  document.getElementById("status").innerText = "Sending...";
 
-  const formData = new URLSearchParams();
-formData.append("data", JSON.stringify(payload));
+  try {
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbzAqDDnvYwaPyy6HAVLOsIALtwucv8MXs7q8yeQoNYDzEn5YKci_hiufqGcZdcHJQWY/exec",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
 
-const res = await fetch(SCRIPT_URL, {
-  method: "POST",
-  body: formData
+    const result = await response.json();
+
+    if (result.success) {
+      document.getElementById("status").innerText = "Submitted successfully";
+    } else {
+      document.getElementById("status").innerText = "Backend error";
+      console.error(result.error);
+    }
+
+  } catch (err) {
+    document.getElementById("status").innerText = "Request failed";
+    console.error(err);
+  }
 });
-
-
-  const json = await res.json();
-
-  statusEl().innerText = json.success ? "Done" : json.error;
-  if (json.success) items.length = 0;
-  render();
-};
-
-function render() {
-  listEl().innerHTML = "";
-  items.forEach(i => {
-    const li = document.createElement("li");
-    li.textContent = `${i.amount}x - ${i.item}`;
-    listEl().appendChild(li);
-  });
-}
-
-const emailEl = () => document.getElementById("userEmail");
-const typeEl = () => document.getElementById("type");
-const clientEl = () => document.getElementById("client");
-const itemEl = () => document.getElementById("item");
-const amountEl = () => document.getElementById("amount");
-const descEl = () => document.getElementById("description");
-const listEl = () => document.getElementById("itemsList");
-const statusEl = () => document.getElementById("status");
