@@ -6,18 +6,33 @@
 </head>
 <body>
 
-  <input id="user_email" placeholder="Email"><br>
-  <input id="source" placeholder="Source"><br>
-  <input id="type" placeholder="Type"><br>
-  <input id="client" placeholder="Client"><br>
-  <input id="amount" placeholder="Amount"><br>
-  <input id="item" placeholder="Item"><br>
-  <input id="description" placeholder="Description"><br><br>
+<input type="email" id="userEmail" placeholder="Seu email" required>
 
-  <button id="submitBtn">Enviar</button>
+<form id="itemForm">
+  <input type="date" id="date" required>
 
-  <!-- CACHE BUSTING OBRIGATÓRIO -->
-<script src="inventory.js?v=20260120"></script>
+  <select id="type" required>
+    <option value="">Selecione</option>
+    <option value="IN">IN</option>
+    <option value="OUT">OUT</option>
+  </select>
+
+  <input type="text" id="client" placeholder="Cliente" required>
+  <input type="number" id="amount" placeholder="Quantidade" required>
+  <input type="text" id="item" placeholder="Item" required>
+
+  <textarea id="description" placeholder="Descrição (opcional)"></textarea>
+
+  <button type="submit">Adicionar item</button>
+</form>
+
+<ul id="itemsList"></ul>
+
+<button id="submitAll">Enviar tudo</button>
+
+<div id="status"></div>
+
+<script src="inventory.js"></script>
 
 </body>
 </html>
