@@ -1,6 +1,6 @@
 console.log("JS NOVO CARREGADO", new Date().toISOString());
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby0wr_7UW6BGG_QbkGfS8ZME9HZqk34UnrC8FdemsTfQshw3DT9Avwiz16rZxwT8-HD/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyl1IGsRcTZiOe3IqP4sJmbj8RWSRuzXHGKVOZ4S_vW0Su0Azn5Tj2I-dFfuVgLA_k5/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("submitBtn");
