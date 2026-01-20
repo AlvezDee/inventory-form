@@ -1,39 +1,74 @@
 console.log("JS NOVO CARREGADO", new Date().toISOString());
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyl1IGsRcTZiOe3IqP4sJmbj8RWSRuzXHGKVOZ4S_vW0Su0Azn5Tj2I-dFfuVgLA_k5/exec";
+const items = [];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("submitBtn");
+const form = document.getElementById("itemForm");
+const list = document.getElementById("itemsList");
+const submitAllBtn = document.getElementById("submitAll");
+const statusDiv = document.getElementById("status");
 
-  if (!btn) {
-    console.error("Botão submitBtn não encontrado");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const date = document.getElementById("date").value;
+  const type = document.getElementById("type").value;
+  const client = document.getElementById("client").value.trim();
+  const amount = Number(document.getElementById("amount").value);
+  const item = document.getElementById("item").value.trim();
+  const description = document.getElementById("description").value.trim();
+  const userEmail = document.getElementById("userEmail").value.trim();
+
+  // ===== VALIDAÇÃO FORTE =====
+  if (!date) return alert("Data obrigatória");
+  if (!type) return alert("IN/OUT obrigatório");
+  if (!client) return alert("Cliente obrigatório");
+  if (!item) return alert("Item obrigatório");
+  if (!userEmail || !userEmail.includes("@")) return alert("Email inválido");
+  if (!Number.isFinite(amount) || amount <= 0) return alert("Quantidade inválida");
+
+  items.push({
+    date,
+    type,
+    client,
+    amount,
+    item,
+    description,
+    userEmail
+  });
+
+  const li = document.createElement("li");
+  li.textContent = `${type} | ${amount} | ${item} | ${client}`;
+  list.appendChild(li);
+
+  form.reset();
+});
+
+submitAllBtn.onclick = async () => {
+  if (!items.length) {
+    alert("Nenhum item para enviar");
     return;
   }
 
-  btn.onclick = async () => {
-    const payload = {
-      user_email: document.getElementById("user_email").value,
-      source: document.getElementById("source").value,
-      type: document.getElementById("type").value,
-      client: document.getElementById("client").value,
-      amount: document.getElementById("amount").value,
-      item: document.getElementById("item").value,
-      description: document.getElementById("description").value
-    };
+  statusDiv.textContent = "Enviando...";
 
-    try {
-      const res = await fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify(payload)
-      });
+  try {
+    const res = await fetch("COLE_AQUI_A_URL_DO_APPS_SCRIPT", {
+      method: "POST",
+      body: JSON.stringify({ items }),
+      headers: { "Content-Type": "application/json" }
+    });
 
-      const json = await res.json();
-      alert("Enviado com sucesso");
-      console.log(json);
+    const json = await res.json();
 
-    } catch (err) {
-      console.error("Erro no envio", err);
-      alert("Erro ao enviar");
+    if (!json.success) {
+      throw new Error(json.error || "Erro desconhecido");
     }
-  };
-});
+
+    statusDiv.textContent = "Enviado com sucesso";
+    list.innerHTML = "";
+    items.length = 0;
+  } catch (err) {
+    console.error(err);
+    statusDiv.textContent = "Erro ao enviar";
+  }
+};
