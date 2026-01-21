@@ -53,7 +53,7 @@ submitAllBtn.onclick = async () => {
 
   try {
     await fetch(
-      "https://script.google.com/macros/s/AKfycbxERPok44cL5J1NnIZkM7A_RZlTHeXtLB7PVZHZhvLhawrgJ2ggI6XFt6XgqEjcrneG/exec",
+      "https://script.google.com/macros/s/AKfycbxs4-X7dsVjL1gFFm8SgIx07xT2sn_UMhFFAWoy5hSYGYktpSC_GqOLWIDwC5mtJBsR/exec",
       {
         method: "POST",
         mode: "no-cors",
