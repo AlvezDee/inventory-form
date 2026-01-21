@@ -55,7 +55,9 @@ submitAllBtn.onclick = async () => {
     const res = await fetch("https://script.google.com/macros/s/AKfycbxiCdDD-5UE28qEE0DrJnqIRozY2PF8Sye9KDYA3w6WCotgw75bmo3bFCtW84pnwgrf/exec", {
       method: "POST",
       body: JSON.stringify({ items }),
-      headers: { "Content-Type": "application/json" }
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      }
     });
 
     const json = await res.json();
@@ -65,8 +67,9 @@ submitAllBtn.onclick = async () => {
     }
 
     statusDiv.textContent = "Enviado com sucesso";
-    list.innerHTML = "";
     items.length = 0;
+    list.innerHTML = "";
+
   } catch (err) {
     console.error(err);
     statusDiv.textContent = "Erro ao enviar";
