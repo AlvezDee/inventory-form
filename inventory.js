@@ -52,7 +52,7 @@ submitAllBtn.onclick = async () => {
   statusDiv.textContent = "Enviando...";
 
   try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbxiCdDD-5UE28qEE0DrJnqIRozY2PF8Sye9KDYA3w6WCotgw75bmo3bFCtW84pnwgrf/exec", {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbxERPok44cL5J1NnIZkM7A_RZlTHeXtLB7PVZHZhvLhawrgJ2ggI6XFt6XgqEjcrneG/exec", {
       method: "POST",
       body: JSON.stringify({ items }),
       headers: {
