@@ -52,20 +52,16 @@ submitAllBtn.onclick = async () => {
   statusDiv.textContent = "Enviando...";
 
   try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbxERPok44cL5J1NnIZkM7A_RZlTHeXtLB7PVZHZhvLhawrgJ2ggI6XFt6XgqEjcrneG/exec", {
-      method: "POST",
-      body: JSON.stringify({ items }),
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbxERPok44cL5J1NnIZkM7A_RZlTHeXtLB7PVZHZhvLhawrgJ2ggI6XFt6XgqEjcrneG/exec",
+      {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({ items })
       }
-    });
+    );
 
-    const json = await res.json();
-
-    if (!json.success) {
-      throw new Error(json.error || "Erro desconhecido");
-    }
-
+    // NÃO tente ler resposta
     statusDiv.textContent = "Enviado com sucesso";
     items.length = 0;
     list.innerHTML = "";
