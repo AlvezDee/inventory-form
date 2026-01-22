@@ -1,0 +1,28 @@
+function doPost(e) {
+  const sheet = SpreadsheetApp
+    .getActiveSpreadsheet()
+    .getSheetByName("Sheet1");
+
+  if (!sheet) {
+    return ContentService.createTextOutput(
+      JSON.stringify({ error: "Sheet1 not found" })
+    ).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  const data = JSON.parse(e.postData.contents);
+
+  sheet.appendRow([
+    new Date(),
+    data.user_email || "",
+    data.source || "",
+    data.type || "",
+    data.client || "",
+    data.amount || "",
+    data.item || "",
+    data.description || ""
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ success: true }))
+    .setMimeType(ContentService.MimeType.JSON);
+}

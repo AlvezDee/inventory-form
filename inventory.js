@@ -1,73 +1,39 @@
 console.log("JS NOVO CARREGADO", new Date().toISOString());
 
-const items = [];
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzmvnobdeBYPBqcX2552mmmbeAz4k50ftkvjFkOioel1CdFytiQUerzG-HKj-nC6RFdDQ/exec";
 
-const form = document.getElementById("itemForm");
-const list = document.getElementById("itemsList");
-const submitAllBtn = document.getElementById("submitAll");
-const statusDiv = document.getElementById("status");
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("submitBtn");
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const date = document.getElementById("date").value;
-  const type = document.getElementById("type").value;
-  const client = document.getElementById("client").value.trim();
-  const amount = Number(document.getElementById("amount").value);
-  const item = document.getElementById("item").value.trim();
-  const description = document.getElementById("description").value.trim();
-  const userEmail = document.getElementById("userEmail").value.trim();
-
-  // ===== VALIDAÇÃO FORTE =====
-  if (!date) return alert("Data obrigatória");
-  if (!type) return alert("IN/OUT obrigatório");
-  if (!client) return alert("Cliente obrigatório");
-  if (!item) return alert("Item obrigatório");
-  if (!userEmail || !userEmail.includes("@")) return alert("Email inválido");
-  if (!Number.isFinite(amount) || amount <= 0) return alert("Quantidade inválida");
-
-  items.push({
-    date,
-    type,
-    client,
-    amount,
-    item,
-    description,
-    userEmail
-  });
-
-  const li = document.createElement("li");
-  li.textContent = `${type} | ${amount} | ${item} | ${client}`;
-  list.appendChild(li);
-
-  form.reset();
-});
-
-submitAllBtn.onclick = async () => {
-  if (!items.length) {
-    alert("Nenhum item para enviar");
+  if (!btn) {
+    console.error("Botão submitBtn não encontrado");
     return;
   }
 
-  statusDiv.textContent = "Enviando...";
+  btn.onclick = async () => {
+    const payload = {
+      user_email: document.getElementById("user_email").value,
+      source: document.getElementById("source").value,
+      type: document.getElementById("type").value,
+      client: document.getElementById("client").value,
+      amount: document.getElementById("amount").value,
+      item: document.getElementById("item").value,
+      description: document.getElementById("description").value
+    };
 
-  try {
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbxs4-X7dsVjL1gFFm8SgIx07xT2sn_UMhFFAWoy5hSYGYktpSC_GqOLWIDwC5mtJBsR/exec",
-      {
+    try {
+      const res = await fetch(SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors",
-        body: JSON.stringify({ items })
-      }
-    );
+        body: JSON.stringify(payload)
+      });
 
-    // NÃO tente ler resposta
-    statusDiv.textContent = "Enviado com sucesso";
-    items.length = 0;
-    list.innerHTML = "";
+      const json = await res.json();
+      alert("Enviado com sucesso");
+      console.log(json);
 
-  } catch (err) {
-    console.error(err);
-    statusDiv.textContent = "Erro ao enviar";
-  }
-};
+    } catch (err) {
+      console.error("Erro no envio", err);
+      alert("Erro ao enviar");
+    }
+  };
+});
